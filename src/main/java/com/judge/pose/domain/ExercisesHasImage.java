@@ -5,12 +5,12 @@ public class ExercisesHasImage {
 
     private Integer imageId;
 
-    private Integer index;
+    private Integer index_;
 
     public ExercisesHasImage(Integer exercisesId, Integer imageId, Integer index) {
         this.exercisesId = exercisesId;
         this.imageId = imageId;
-        this.index = index;
+        this.index_ = index;
     }
 
     public ExercisesHasImage() {
@@ -34,10 +34,10 @@ public class ExercisesHasImage {
     }
 
     public Integer getIndex() {
-        return index;
+        return index_;
     }
 
     public void setIndex(Integer index) {
-        this.index = index;
+        this.index_ = index;
     }
 }
