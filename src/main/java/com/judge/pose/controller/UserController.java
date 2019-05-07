@@ -63,7 +63,7 @@ public class UserController {
             userMapper.register(user);
             return user.toString();
         }else{
-            return "";
+            return "fail";
         }
 
     }

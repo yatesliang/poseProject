@@ -16,8 +16,8 @@ public class UseExercisesController {
     private UserHasExercisesMapper userHasExercisesMapper;
     @RequestMapping(value = "/user/{id}/courses", method = RequestMethod.GET)
     @ResponseBody
-    public ResultModel2 getUserCourses(@PathVariable("id") int id){
-        List<Map<String,Object> > result = userHasExercisesMapper.GetUserCourses(id);
+    public ResultModel2 getUserCourses(@PathVariable("id") int id,@PathVariable("type") int type){
+        List<Map<String,Object> > result = userHasExercisesMapper.GetUserCourses(id,type);
         ResultModel2 resultModel2 = new ResultModel2(result);
         return resultModel2;
     }

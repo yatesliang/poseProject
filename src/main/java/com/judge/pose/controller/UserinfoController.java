@@ -20,7 +20,7 @@ public class UserinfoController {
     public String  updateUserinfo(@RequestParam(value="id") int id, @RequestParam(value="age",required = false)int age,
                                   @RequestParam(value="gender",required = false)int gender, @RequestParam(value="avatar",required = false) java.lang.String avatar){
         if(userinfoMapper.CheckUpdate(id)!=0){
-            userinfoMapper.UpdateUserInfo(id,age,gender,avatar);
+            userinfoMapper.UpdateUserInfo(id,age,gender);
             return "update success";
         }else{
             return "delete failed";
