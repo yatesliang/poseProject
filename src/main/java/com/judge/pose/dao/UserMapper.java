@@ -3,6 +3,8 @@ package com.judge.pose.dao;
 import com.judge.pose.domain.User;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
 public interface UserMapper extends Mapper<User> {
@@ -15,4 +17,12 @@ public interface UserMapper extends Mapper<User> {
     java.lang.String GetUserNameById(int id);
 
     java.lang.String GetUserSigniture(int id);
+
+
+    @Select("select u.* " +
+            "from user u " +
+            "where u.name=#{uname}")
+    User getUserByName(@Param("uname") String name);
+
+//    @Select("")
 }
