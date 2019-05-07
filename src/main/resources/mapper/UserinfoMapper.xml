@@ -9,7 +9,7 @@
 </select>
 <update id="UpdateUserInfo" >
     update userinfo
-    set age = #{arg1},gender = #{arg2},avatar = #{arg3}
+    set age = #{arg1},gender = #{arg2}
     where user_id = #{arg0}
 </update>
 </mapper>
