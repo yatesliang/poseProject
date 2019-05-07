@@ -6,6 +6,6 @@ import tk.mybatis.mapper.common.Mapper;
 
 public interface UserinfoMapper extends Mapper<Userinfo> {
     int CheckUpdate(int id);
-    void UpdateUserInfo(int id, int age, int gender, java.lang.String avatar);
+    void UpdateUserInfo(int id, int age, int gender);
 
 }

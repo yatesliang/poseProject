@@ -64,7 +64,9 @@ public class UserController {
             userMapper.register(user);
             return "Register Successfully";
         }else{
+
             return "Username already existed";
+
         }
 
     }

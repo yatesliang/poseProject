@@ -12,5 +12,5 @@ import java.util.Map;
 public interface UserHasExercisesMapper extends Mapper<UserHasExercises> {
     void DeleteCourse( int id, int ex_id);
     int CheckDeletion(int id,int ex_id);
-    List<Map<String,Object> > GetUserCourses(int id);
+    List<Map<String,Object> > GetUserCourses(int id,int type);
 }
