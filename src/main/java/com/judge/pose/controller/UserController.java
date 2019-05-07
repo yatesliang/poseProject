@@ -81,19 +81,28 @@ public class UserController {
         }
         if (user.getPassword().equals(password)) {
             HttpSession session = request.getSession();
-            if(session.getAttribute("id")!=null) {
+            if(session.getAttribute("userId")!=null) {
                 System.out.println("您已登录");
                 return "success";
 
             }
             else {
-                session.setAttribute("id", user.getId());
+                session.setAttribute("userId", user.getId());
                 System.out.println("登录成功");
                 return "success";
             }
         } else {
             return "Password or Username incorrect!";
         }
+    }
+
+    @RequestMapping(value = "/user/hasCourse")
+    @ResponseBody
+    public Integer UserHasCourse(@RequestParam("exId") Integer exId, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Integer userId = session.getAttribute("userId") == null?1:(Integer)session.getAttribute("userId");
+        System.out.println(userId);
+        return userMapper.userTakeCourse(userId,exId);
     }
 
 

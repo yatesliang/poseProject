@@ -24,5 +24,6 @@ public interface UserMapper extends Mapper<User> {
             "where u.name=#{uname}")
     User getUserByName(@Param("uname") String name);
 
-//    @Select("")
+    @Select("select count(*) from user_has_exercises where user_id=#{userId} and exercises_id=#{exId}")
+    Integer userTakeCourse(@Param("userId") Integer userId, @Param("exId") Integer exId);
 }

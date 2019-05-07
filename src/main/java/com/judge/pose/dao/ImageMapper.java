@@ -11,7 +11,7 @@ import java.util.Map;
 public interface ImageMapper extends Mapper<Image> {
     List<String> StartExercise(int id);
     List<Map<String,Object> >GetAllCourses(String type);
-
+    List<Map<String,Object> >GetRecommendation(int id);
 
     @Select("select max(id) " +
             "from image")
