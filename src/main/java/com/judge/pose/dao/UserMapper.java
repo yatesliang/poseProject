@@ -12,7 +12,10 @@ public interface UserMapper extends Mapper<User> {
             "value(#{password},#{name},#{phone},#{email})"})*/
     void register( User user);
 
-    int checkUserExisted(String name);
+    @Select("select count(*) " +
+            "from user " +
+            "where name = #{name}")
+    Integer checkUserExisted(@Param("name") String name);
 
     java.lang.String GetUserNameById(int id);
 
