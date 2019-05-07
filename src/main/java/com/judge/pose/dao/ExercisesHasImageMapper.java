@@ -13,6 +13,6 @@ import tk.mybatis.mapper.common.Mapper;
 public interface ExercisesHasImageMapper extends Mapper<ExercisesHasImage> {
     @Select("select max(index_) " +
             "from exercises_has_image " +
-            "where exercises_id = #{exId} and image_id = #{imageId}")
+            "where exercises_id = #{exId} ")
     Integer getMaxIndex(@Param("exId") Integer exId, @Param("imageId") Integer imageId);
 }

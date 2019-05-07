@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class UserController {
@@ -54,25 +55,45 @@ public class UserController {
     @ResponseBody
     public String register(@RequestParam("userName") String userName, @RequestParam("password") String password,
                            @RequestParam("phone") String phone, @RequestParam("email") String email) {
-       if(true) {
+       if(userMapper.checkUserExisted(userName) < 1) {
             User user = new User();
             user.setName(userName);
             user.setPassword(password);
             user.setPhone(phone);
             user.setEmail(email);
             userMapper.register(user);
-            return user.toString();
+            return "Register Successfully";
         }else{
-            return "fail";
+
+            return "Username already existed";
+
         }
 
     }
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     @ResponseBody
-    public String login(@RequestParam("userName") String userName, @RequestParam("password") String password) {
+    public String login(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpServletRequest request) {
         //check user
-        return "ok";
+        User user = userMapper.getUserByName(userName);
+        if (user.getId() == null) {
+            return "User doesn't exist!";
+        }
+        if (user.getPassword().equals(password)) {
+            HttpSession session = request.getSession();
+            if(session.getAttribute("id")!=null) {
+                System.out.println("您已登录");
+                return "success";
+
+            }
+            else {
+                session.setAttribute("id", user.getId());
+                System.out.println("登录成功");
+                return "success";
+            }
+        } else {
+            return "Password or Username incorrect!";
+        }
     }
 
 
