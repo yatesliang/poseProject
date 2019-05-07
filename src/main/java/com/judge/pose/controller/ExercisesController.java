@@ -26,6 +26,14 @@ public class ExercisesController {
         return resultModel2;
     }
 
+    @RequestMapping(value = "/course/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultModel2 getRecommendation(@PathVariable("id") int id){
+        List<Map<String,Object> >result = imageMapper.GetRecommendation(id);
+        ResultModel2 resultModel2 = new ResultModel2(result);
+        return resultModel2;
+    }
+
     @RequestMapping(value = "/course/{exercisesId}/start/image", method = RequestMethod.GET)
     @ResponseBody
     public ResultModel getCourseFirstImage(@PathVariable("exercisesId") int exercisesId){
