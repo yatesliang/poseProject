@@ -6,9 +6,7 @@
   values (#{name},#{password},#{phone},#{email})
 </insert>
 
-    <select id = "checkUserExisted" parameterType="java.lang.String">
 
-</select>
 
     <select id="GetUserNameById" parameterType="int" resultType="java.lang.String">
         select name
