@@ -22,7 +22,7 @@ public class UseExercisesController {
         return resultModel2;
     }
 
-    @RequestMapping(value = "/user/{id}/{exercisesId}/courses", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}/{ex_id}/courses", method = RequestMethod.GET)
     @ResponseBody
     public String IsUserWithCourses(@PathVariable("id") int id,@PathVariable("ex_id") int ex_id){
         int result = userHasExercisesMapper.IsUserWithCourses(id,ex_id);
