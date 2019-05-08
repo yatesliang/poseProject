@@ -58,3 +58,4 @@ public class ExercisesController {
         return " current_index + image_url";
     }
 }
+
