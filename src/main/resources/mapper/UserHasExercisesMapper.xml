@@ -24,4 +24,10 @@
     from user_has_exercises
     where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}
 </select>
+
+<select id="IsUserWithCourses"  resultType="map">
+    select count(*)
+    from user_has_exercises
+    where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}
+</select>
 </mapper>
