@@ -18,10 +18,18 @@ public class ExercisesController {
     private ImageMapper imageMapper;
 
 
-    @RequestMapping(value = "/courses/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/courses/{type}/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ResultModel2 getAllCourses(@PathVariable("type") String type){
+    public ResultModel2 getAllCourses(@PathVariable("type") String type, @PathVariable("id") int id){
         List<Map<String,Object> >result = imageMapper.GetAllCourses(type);
+        for(int i = 0;i < result.size();i++){
+            if(imageMapper.IsUserWithCourses(id,result.get(i).get("exercise.id"))!= 0){
+                result.get(i).put("Joined",1);
+            }
+            else{
+                result.get(i).put("Joined",0);
+            }
+        }
         ResultModel2 resultModel2 = new ResultModel2(result);
         return resultModel2;
     }
@@ -50,3 +58,4 @@ public class ExercisesController {
         return " current_index + image_url";
     }
 }
+
