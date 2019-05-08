@@ -83,13 +83,13 @@ public class UserController {
             HttpSession session = request.getSession();
             if(session.getAttribute("userId")!=null) {
                 System.out.println("您已登录");
-                return "success";
+                return user.getId().toString();
 
             }
             else {
                 session.setAttribute("userId", user.getId());
                 System.out.println("登录成功");
-                return "success";
+                return user.getId().toString();
             }
         } else {
             return "Password or Username incorrect!";
