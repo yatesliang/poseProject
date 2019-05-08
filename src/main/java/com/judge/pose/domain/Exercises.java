@@ -1,6 +1,12 @@
 package com.judge.pose.domain;
 
+import javax.persistence.Id;
+import javax.persistence.Transient;
+import java.util.List;
+import java.util.Map;
+
 public class Exercises {
+    @Id
     private Integer id;
 
     private String description;
@@ -8,6 +14,8 @@ public class Exercises {
     private String title;
 
     private String type;
+
+    private List<String> images;
 
     public Exercises(Integer id, String description, String title, String type) {
         this.id = id;
@@ -50,5 +58,14 @@ public class Exercises {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    @Transient
+    public List<String> getImages() {
+        return images;
+    }
+    @Transient
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

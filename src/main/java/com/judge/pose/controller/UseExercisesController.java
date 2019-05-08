@@ -1,6 +1,8 @@
 package com.judge.pose.controller;
 
+import com.judge.pose.dao.ExercisesMapper;
 import com.judge.pose.dao.UserHasExercisesMapper;
+import com.judge.pose.domain.Exercises;
 import com.judge.pose.model.ResultModel;
 import com.judge.pose.model.ResultModel2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,15 @@ import java.util.Map;
 public class UseExercisesController {
     @Autowired
     private UserHasExercisesMapper userHasExercisesMapper;
+    @Autowired
+    private ExercisesMapper exercisesMapper;
+
+
     @RequestMapping(value = "/user/{id}/{type}/courses", method = RequestMethod.GET)
     @ResponseBody
     public ResultModel2 getUserCourses(@PathVariable("id") int id,@PathVariable("type") String type){
         List<Map<String,Object> > result = userHasExercisesMapper.GetUserCourses(id,type);
+
         ResultModel2 resultModel2 = new ResultModel2(result);
         return resultModel2;
     }

@@ -1,8 +1,10 @@
 package com.judge.pose.controller;
 
+import com.judge.pose.dao.ExercisesMapper;
 import com.judge.pose.dao.ImageMapper;
 import com.judge.pose.dao.UserHasExercisesMapper;
 import com.judge.pose.dao.UserMapper;
+import com.judge.pose.domain.Exercises;
 import com.judge.pose.domain.UserHasExercises;
 import com.judge.pose.model.ResultModel;
 import com.judge.pose.model.ResultModel2;
@@ -21,6 +23,8 @@ public class ExercisesController {
     private ImageMapper imageMapper;
     @Autowired
     private UserHasExercisesMapper userHasExercisesMapper;
+    @Autowired
+    private ExercisesMapper exercisesMapper;
 
     @RequestMapping(value = "/courses/{type}/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -45,16 +49,21 @@ public class ExercisesController {
     @ResponseBody
     public ResultModel2 getRecommendation(@PathVariable("id") int id){
         List<Map<String,Object> >result = imageMapper.GetRecommendation(id);
+
         ResultModel2 resultModel2 = new ResultModel2(result);
         return resultModel2;
     }
 
-    @RequestMapping(value = "/imgs/{exercisesId}/start/image", method = RequestMethod.GET)
+    @RequestMapping(value = "/imgs/{exercisesId}", method = RequestMethod.GET)
     @ResponseBody
-    public ResultModel getCourseFirstImage(@PathVariable("exercisesId") int exercisesId){
+    public Exercises getCourseFirstImage(@PathVariable("exercisesId") int exercisesId){
         List<String> result =  imageMapper.StartExercise(exercisesId);
+        Exercises exercises = exercisesMapper.selectByPrimaryKey(exercisesId);
+        if (exercises != null) {
+            exercises.setImages(result);
+        }
         ResultModel resultModel = new ResultModel(result);
-        return resultModel;
+        return exercises;
         //return " index(totalNum) + image_url";
         //return"";s
     }
