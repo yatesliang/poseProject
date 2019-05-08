@@ -18,4 +18,10 @@
     where exercises.id = exercises_has_image.exercises_id and exercises.id = user_has_exercises.user_id and exercises_has_image.index_ = 1
     and user_has_exercises.user_id = #{id} and exercises_has_image.image_id = image.id and exercises.type = #{type}
 </select>
+
+<select id="IsUserWithCourses"  resultType="map">
+    select count(*)
+    from user_has_exercises
+    where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}
+</select>
 </mapper>

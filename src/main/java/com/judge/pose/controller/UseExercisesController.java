@@ -16,11 +16,24 @@ public class UseExercisesController {
     private UserHasExercisesMapper userHasExercisesMapper;
     @RequestMapping(value = "/user/{id}/courses", method = RequestMethod.GET)
     @ResponseBody
-    public ResultModel2 getUserCourses(@PathVariable("id") int id,@PathVariable("type") int type){
+    public ResultModel2 getUserCourses(@PathVariable("id") int id,@PathVariable("type") String type){
         List<Map<String,Object> > result = userHasExercisesMapper.GetUserCourses(id,type);
         ResultModel2 resultModel2 = new ResultModel2(result);
         return resultModel2;
     }
+
+    @RequestMapping(value = "/user/{id}/{exercisesId}/courses", method = RequestMethod.GET)
+    @ResponseBody
+    public String IsUserWithCourses(@PathVariable("id") int id,@PathVariable("ex_id") int ex_id){
+        int result = userHasExercisesMapper.IsUserWithCourses(id,ex_id);
+        if(result >= 1){
+            return "Yes";
+        }
+        else{
+            return "No";
+        }
+    }
+
 
     @RequestMapping(value = "/user/{id}/courses/{exercisesId}", method = RequestMethod.DELETE)
     @ResponseBody
