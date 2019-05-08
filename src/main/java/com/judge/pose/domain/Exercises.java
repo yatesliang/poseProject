@@ -15,7 +15,7 @@ public class Exercises {
 
     private String type;
 
-    private List<String> images;
+    private List<Image> images;
 
     public Exercises(Integer id, String description, String title, String type) {
         this.id = id;
@@ -61,11 +61,11 @@ public class Exercises {
     }
 
     @Transient
-    public List<String> getImages() {
+    public List<Image> getImages() {
         return images;
     }
     @Transient
-    public void setImages(List<String> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 }

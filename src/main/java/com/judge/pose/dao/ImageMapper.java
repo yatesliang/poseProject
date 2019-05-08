@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,5 +19,10 @@ public interface ImageMapper extends Mapper<Image> {
     @Select("select max(id) " +
             "from image")
     Integer getMaxId();
+
+    @Select("select i.* " +
+            "from image i, exercises_has_image e " +
+            "where i.id = e.image_id and e.exercises_id=#{exId}")
+    ArrayList<Image> selectImagesByEx(@Param("exId") Integer exId);
 
 }

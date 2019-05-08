@@ -22,7 +22,8 @@ public class FileController {
     void upLoadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
         int exerciseId = Integer.parseInt(request.getParameter("exId"));
         String filename = request.getParameter("filename");
-        fileService.qiniuUpload(file, exerciseId, filename);
+        String desc = request.getParameter("description");
+        fileService.qiniuUpload(file, exerciseId, filename, desc);
     }
 
 }

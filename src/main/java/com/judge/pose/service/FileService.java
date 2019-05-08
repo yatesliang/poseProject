@@ -24,20 +24,20 @@ public class FileService {
     @Autowired
     private ExercisesHasImageMapper exercisesHasImageMapper;
 
-    public void qiniuUpload(MultipartFile file, Integer exerciseId, String filename) throws IOException {
+    public void qiniuUpload(MultipartFile file, Integer exerciseId, String filename, String desc) throws IOException {
         byte[] uploadBytes = file.getBytes();
         String key = exerciseId+"_"+filename;
         String domain = "pqx56p2qu.bkt.clouddn.com/";
         String url = domain + key;
         System.out.println(url);
         QiniuUpload.uploadBytes(uploadBytes,key);
-        updateDB(url, exerciseId, filename);
+        updateDB(url, exerciseId,  desc);
     }
 
-    void updateDB(String url, Integer exerciseId, String filename) {
+    void updateDB(String url, Integer exerciseId,  String desc) {
         // insert entity
         Integer id = generateImageId();
-        Image image = new Image(id, url, filename);
+        Image image = new Image(id, url, desc);
         try {
             imageMapper.insert(image);
         } catch (Exception e) {

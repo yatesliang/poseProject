@@ -5,6 +5,7 @@ import com.judge.pose.dao.ImageMapper;
 import com.judge.pose.dao.UserHasExercisesMapper;
 import com.judge.pose.dao.UserMapper;
 import com.judge.pose.domain.Exercises;
+import com.judge.pose.domain.Image;
 import com.judge.pose.domain.UserHasExercises;
 import com.judge.pose.model.ResultModel;
 import com.judge.pose.model.ResultModel2;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,12 +59,12 @@ public class ExercisesController {
     @RequestMapping(value = "/imgs/{exercisesId}", method = RequestMethod.GET)
     @ResponseBody
     public Exercises getCourseFirstImage(@PathVariable("exercisesId") int exercisesId){
-        List<String> result =  imageMapper.StartExercise(exercisesId);
+        ArrayList<Image> result =  imageMapper.selectImagesByEx(exercisesId);
         Exercises exercises = exercisesMapper.selectByPrimaryKey(exercisesId);
         if (exercises != null) {
             exercises.setImages(result);
         }
-        ResultModel resultModel = new ResultModel(result);
+//        ResultModel resultModel = new ResultModel(result);
         return exercises;
         //return " index(totalNum) + image_url";
         //return"";s
