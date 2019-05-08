@@ -1,9 +1,12 @@
 package com.judge.pose.controller;
 
 import com.judge.pose.dao.ImageMapper;
+import com.judge.pose.dao.UserHasExercisesMapper;
 import com.judge.pose.dao.UserMapper;
+import com.judge.pose.domain.UserHasExercises;
 import com.judge.pose.model.ResultModel;
 import com.judge.pose.model.ResultModel2;
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +19,18 @@ public class ExercisesController {
 
     @Autowired
     private ImageMapper imageMapper;
-
+    @Autowired
+    private UserHasExercisesMapper userHasExercisesMapper;
 
     @RequestMapping(value = "/courses/{type}/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResultModel2 getAllCourses(@PathVariable("type") String type, @PathVariable("id") int id){
         List<Map<String,Object> >result = imageMapper.GetAllCourses(type);
         for(int i = 0;i < result.size();i++){
-            if(imageMapper.IsUserWithCourses(id,result.get(i).get("exercise.id"))!= 0){
+            System.out.println((result.get(i)).get("id") instanceof Integer);
+            System.out.println((result.get(i)).get("id"));
+            Integer exId = Integer.parseInt((result.get(i)).get("id").toString());
+            if(imageMapper.IsUserWithCourses(id,exId)!= 0){
                 result.get(i).put("Joined",1);
             }
             else{
@@ -56,6 +63,21 @@ public class ExercisesController {
     @ResponseBody
     public String getCourseImageByIndex(@PathVariable("exercisesId") int exercisesId,@PathVariable("index")int index){
         return " current_index + image_url";
+    }
+
+
+    @RequestMapping(value = "/addCourse")
+    @ResponseBody
+    public String addCourse(@RequestParam("id") Integer userId, @RequestParam("exId") Integer exId) {
+        UserHasExercises userHasExercises = new UserHasExercises(userId,exId);
+        UserHasExercises temp = userHasExercisesMapper.selectOne(userHasExercises);
+        if (temp != null && temp.getExercisesId() == userHasExercises.getExercisesId()) {
+            return "This course already added";
+        } else {
+            userHasExercisesMapper.insert(userHasExercises);
+            return "OK";
+
+        }
     }
 }
 

@@ -13,7 +13,7 @@ public interface ImageMapper extends Mapper<Image> {
     List<String> StartExercise(int id);
     List<Map<String,Object> >GetAllCourses(String type);
     List<Map<String,Object> >GetRecommendation(int id);
-    int IsUserWithCourses(int id,Object ex_id);
+    int IsUserWithCourses(int id,Integer ex_id);
 
     @Select("select max(id) " +
             "from image")

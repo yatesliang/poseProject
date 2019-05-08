@@ -5,12 +5,10 @@ public class UserHasExercises {
 
     private Integer exercisesId;
 
-    private Integer lastImage;
 
-    public UserHasExercises(Integer userId, Integer exercisesId, Integer lastImage) {
+    public UserHasExercises(Integer userId, Integer exercisesId) {
         this.userId = userId;
         this.exercisesId = exercisesId;
-        this.lastImage = lastImage;
     }
 
     public UserHasExercises() {
@@ -33,11 +31,4 @@ public class UserHasExercises {
         this.exercisesId = exercisesId;
     }
 
-    public Integer getLastImage() {
-        return lastImage;
-    }
-
-    public void setLastImage(Integer lastImage) {
-        this.lastImage = lastImage;
-    }
 }

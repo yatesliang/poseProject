@@ -17,7 +17,7 @@
     and exercises.type = #{type} and exercises_has_image.image_id = image.id
 </select>
 
-<select id="IsUserWithCourses"  resultType="map">
+<select id="IsUserWithCourses"  resultType="int">
     select count(*)
     from user_has_exercises
     where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}
