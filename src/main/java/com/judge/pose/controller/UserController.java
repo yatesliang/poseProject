@@ -76,7 +76,7 @@ public class UserController {
     public String login(@RequestParam("userName") String userName, @RequestParam("password") String password, HttpServletRequest request) {
         //check user
         User user = userMapper.getUserByName(userName);
-        if (user.getId() == null) {
+        if (user == null || user.getId() == null) {
             return "User doesn't exist!";
         }
         if (user.getPassword().equals(password)) {
