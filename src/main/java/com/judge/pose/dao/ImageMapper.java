@@ -12,9 +12,19 @@ import java.util.Map;
 
 public interface ImageMapper extends Mapper<Image> {
     List<String> StartExercise(int id);
-    List<Map<String,Object> >GetAllCourses(String type);
+
+
+    @Select("select exercises.id, exercises.title, exercises.description, image.address " +
+            "    from exercises, image, exercises_has_image" +
+            "    where exercises.id = exercises_has_image.exercises_id and exercises_has_image.index_ = 1 " +
+            "    and exercises.type = #{type} and exercises_has_image.image_id = image.id")
+    List<Map<String,Object> > GetAllCourses(@Param("type") String type);
     List<Map<String,Object> >GetRecommendation(int id);
-    int IsUserWithCourses(int id,Integer ex_id);
+
+    @Select("select count(*) " +
+            "    from user_has_exercises " +
+            "    where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}")
+    int IsUserWithCourses(@Param("id") int id,@Param("ex_id") Integer ex_id);
 
     @Select("select max(id) " +
             "from image")

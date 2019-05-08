@@ -10,18 +10,18 @@
       where exercises_id = #{id})
 </select>
 
-<select id="GetAllCourses" parameterType="java.lang.String" resultType="map">
-    select exercises.id, exercises.title, exercises.description, image.address
-    from exercises, image, exercises_has_image
-    where exercises.id = exercises_has_image.exercises_id and exercises_has_image.index_ = 1
-    and exercises.type = #{type} and exercises_has_image.image_id = image.id
-</select>
+<!--<select id="GetAllCourses" parameterType="java.lang.String" resultType="map">-->
+<!--    select exercises.id, exercises.title, exercises.description, image.address-->
+<!--    from exercises, image, exercises_has_image-->
+<!--    where exercises.id = exercises_has_image.exercises_id and exercises_has_image.index_ = 1-->
+<!--    and exercises.type = #{arg0} and exercises_has_image.image_id = image.id-->
+<!--</select>-->
 
-<select id="IsUserWithCourses"  resultType="int">
-    select count(*)
-    from user_has_exercises
-    where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}
-</select>
+<!--<select id="IsUserWithCourses"  resultType="int">-->
+<!--    select count(*)-->
+<!--    from user_has_exercises-->
+<!--    where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}-->
+<!--</select>-->
 
 <select id="GetRecommendation"  resultType="map">
     select exercises.id, exercises.title, exercises.description, image.address
