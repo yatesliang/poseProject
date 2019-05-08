@@ -28,9 +28,9 @@ public class ExercisesController {
     @Autowired
     private ExercisesMapper exercisesMapper;
 
-    @RequestMapping(value = "/courses/{type}/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/courses", method = RequestMethod.GET)
     @ResponseBody
-    public ResultModel2 getAllCourses(@PathVariable("type") String type, @PathVariable("id") int id){
+    public ResultModel2 getAllCourses(@RequestParam("type") String type, @RequestParam("id") int id){
         List<Map<String,Object> >result = imageMapper.GetAllCourses(type);
         for(int i = 0;i < result.size();i++){
             System.out.println((result.get(i)).get("id") instanceof Integer);

@@ -14,7 +14,7 @@
     select exercises.id, exercises.title, exercises.description, image.address
     from exercises, image, exercises_has_image
     where exercises.id = exercises_has_image.exercises_id and exercises_has_image.index_ = 1
-    and exercises.type = #{args0} and exercises_has_image.image_id = image.id
+    and exercises.type = #{type} and exercises_has_image.image_id = image.id
 </select>
 
 <select id="IsUserWithCourses"  resultType="int">
