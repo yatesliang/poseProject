@@ -17,6 +17,12 @@
     and exercises.type = #{type} and exercises_has_image.image_id = image.id
 </select>
 
+<select id="IsUserWithCourses"  resultType="map">
+    select count(*)
+    from user_has_exercises
+    where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}
+</select>
+
 <select id="GetRecommendation"  resultType="map">
     select exercises.id, exercises.title, exercises.description, image.address
     from exercises, image, exercises_has_image,user_has_exercises

@@ -22,7 +22,9 @@ public class UseExercisesController {
         return resultModel2;
     }
 
+
     /*@RequestMapping(value = "/user/{id}/{exercisesId}/courses", method = RequestMethod.GET)
+
     @ResponseBody
     public String IsUserWithCourses(@PathVariable("id") int id,@PathVariable("ex_id") int ex_id){
         int result = userHasExercisesMapper.IsUserWithCourses(id,ex_id);
@@ -32,7 +34,9 @@ public class UseExercisesController {
         else{
             return "No";
         }
+
     }*/
+
 
 
     @RequestMapping(value = "/user/{id}/courses/{exercisesId}", method = RequestMethod.DELETE)
