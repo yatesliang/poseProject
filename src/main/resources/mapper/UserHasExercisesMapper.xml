@@ -19,9 +19,5 @@
     and user_has_exercises.user_id = #{arg0} and exercises_has_image.image_id = image.id and exercises.type = #{arg1}
 </select>
 
-<select id="IsUserWithCourses"  resultType="map">
-    select count(*)
-    from user_has_exercises
-    where user_has_exercises.user_id = #{id} and user_has_exercises.exercises_id = #{ex_id}
-</select>
+
 </mapper>
