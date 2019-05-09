@@ -3,19 +3,19 @@
 <mapper namespace="com.judge.pose.dao.UserHasExercisesMapper" >
     <delete id="DeleteCourse" >
         delete from user_has_exercises
-        where user_id = #{id} and exercises_id = #{ex_id}
+        where user_id = #{arg0} and exercises_id = #{arg1}
 
     </delete>
     <select id="CheckDeletion" resultType="int" >
         select count(user_id)
         from user_has_exercises
-        where user_id =#{id} and exercises_id = #{ex_id}
+        where user_id =#{arg0} and exercises_id = #{arg1}
     </select>
 
 <select id="GetUserCourses"  resultType="map">
     select exercises.id, exercises.title, exercises.description, image.address
     from exercises, image, exercises_has_image,user_has_exercises
-    where exercises.id = exercises_has_image.exercises_id and exercises.id = user_has_exercises.user_id and exercises_has_image.index_ = 1
+    where exercises.id = exercises_has_image.exercises_id and exercises.id = user_has_exercises.exercises_id and exercises_has_image.index_ = 1
     and user_has_exercises.user_id = #{arg0} and exercises_has_image.image_id = image.id and exercises.type = #{arg1}
 </select>
 
